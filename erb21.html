@@ -10,298 +10,302 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: 'Noto Sans KR', -apple-system, sans-serif;
-  background: #f0f2f5;
+  background: linear-gradient(160deg, #f0f4ff 0%, #faf0ff 50%, #f0f8ff 100%);
+  background-attachment: fixed;
   color: #1a1a2e;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
 
+/* ── Header ── */
 .app-header {
-  background: #fff;
-  padding: 16px 20px 14px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 14px 20px;
   display: flex;
   align-items: center;
   gap: 12px;
-  border-bottom: 1px solid #ebebeb;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
   position: sticky;
   top: 0;
   z-index: 100;
 }
 .app-logo {
-  width: 40px; height: 40px;
-  border-radius: 12px;
+  width: 38px; height: 38px;
+  border-radius: 11px;
   background: linear-gradient(135deg, #667eea, #764ba2);
   display: flex; align-items: center; justify-content: center;
-  font-size: 18px; flex-shrink: 0;
+  font-size: 17px; flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(102,126,234,0.4);
 }
 .app-title-group { flex: 1; }
 .app-title { font-size: 15px; font-weight: 700; color: #1a1a2e; }
-.app-sub { font-size: 12px; color: #888; margin-top: 1px; }
+.app-sub { font-size: 11px; color: #999; margin-top: 1px; }
 .app-refresh {
-  width: 36px; height: 36px;
-  border-radius: 10px;
-  background: #f5f5f7;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background 0.15s;
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  background: rgba(0,0,0,0.05);
+  border: none; cursor: pointer;
+  font-size: 15px;
+  transition: all 0.15s;
   flex-shrink: 0;
 }
-.app-refresh:hover { background: #e8e8ec; }
-.app-refresh:disabled { opacity: 0.4; }
+.app-refresh:hover { background: rgba(0,0,0,0.1); }
+.app-refresh:disabled { opacity: 0.3; }
 
-.main { padding: 16px; max-width: 640px; margin: 0 auto; }
+/* ── Main ── */
+.main { padding: 16px; max-width: 600px; margin: 0 auto; }
 
+/* ── Hero Card ── */
 .hero-card {
   background: #fff;
-  border-radius: 20px;
-  padding: 20px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border-radius: 22px;
+  padding: 22px 20px 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
 }
-.hero-label { font-size: 13px; font-weight: 500; color: #666; margin-bottom: 10px; }
-
-.progress-bar-wrap { margin-bottom: 6px; position: relative; padding-top: 28px; }
-.pct-badge {
-  position: absolute;
-  right: 0; top: 0;
-  background: #1a1a2e;
-  color: #fff;
-  font-size: 11px;
+.hero-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #888;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hero-pct {
+  font-size: 13px;
   font-weight: 700;
-  padding: 3px 8px;
-  border-radius: 6px;
+  color: #667eea;
 }
-.pct-badge::after {
-  content: '';
-  position: absolute;
-  bottom: -4px; right: 10px;
-  border: 4px solid transparent;
-  border-top-color: #1a1a2e;
-  border-bottom: none;
-}
-.progress-bar-bg {
+
+/* Progress bar */
+.prog-wrap { position: relative; margin-bottom: 8px; }
+.prog-bg {
   height: 10px;
-  background: #eef0f4;
+  background: #f0f0f5;
   border-radius: 99px;
   overflow: visible;
-  position: relative;
 }
-.progress-bar-fill {
+.prog-fill {
   height: 100%;
   border-radius: 99px;
   background: linear-gradient(90deg, #667eea, #a78bfa, #f472b6);
-  transition: width 1.2s cubic-bezier(.4,0,.2,1);
+  transition: width 1.4s cubic-bezier(.4,0,.2,1);
   position: relative;
+  min-width: 18px;
 }
-.runner-emoji {
+.prog-runner {
   position: absolute;
-  right: -4px; top: 50%;
+  right: -2px; top: 50%;
   transform: translateY(-50%);
-  font-size: 18px; line-height: 1;
-}
-.progress-dates {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
-  color: #aaa;
-  margin-top: 6px;
-}
-
-.hero-status {
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid #f0f0f0;
-}
-.hero-status-title {
-  font-size: 28px;
-  font-weight: 900;
-  color: #1a1a2e;
-  letter-spacing: -0.5px;
-  margin-bottom: 4px;
-}
-.hero-status-sub { font-size: 13px; color: #888; }
-
-.data-bar-wrap { margin-top: 12px; }
-.data-bar-label { font-size: 12px; color: #888; margin-bottom: 6px; }
-.data-bar-label strong { color: #1a1a2e; }
-.data-bar-bg { height: 6px; background: #eef0f4; border-radius: 99px; overflow: hidden; }
-.data-bar-fill {
-  height: 100%;
+  background: #fff;
   border-radius: 99px;
+  padding: 2px 7px;
+  font-size: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  white-space: nowrap;
+  display: flex; align-items: center; gap: 3px;
+}
+.prog-runner span { font-size: 10px; font-weight: 700; color: #667eea; }
+.prog-dates {
+  display: flex; justify-content: space-between;
+  font-size: 11px; color: #bbb; margin-top: 6px;
+}
+
+/* Hero status */
+.hero-status { margin-top: 18px; padding-top: 18px; border-top: 1px solid #f3f3f3; }
+.hero-title {
+  font-size: 30px; font-weight: 900;
+  color: #1a1a2e; letter-spacing: -1px; margin-bottom: 3px;
+}
+.hero-desc { font-size: 13px; color: #999; margin-bottom: 14px; }
+
+.data-reflect { margin-bottom: 4px; }
+.data-reflect-label {
+  font-size: 12px; color: #aaa; margin-bottom: 6px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.data-reflect-label strong { color: #555; font-weight: 600; }
+.data-bg { height: 5px; background: #f0f0f5; border-radius: 99px; overflow: hidden; }
+.data-fill {
+  height: 100%; border-radius: 99px;
   background: linear-gradient(90deg, #667eea, #a78bfa);
   transition: width 1s ease;
 }
-.hero-meta { font-size: 12px; color: #aaa; margin-top: 8px; }
+.hero-meta { font-size: 11px; color: #bbb; margin-top: 8px; }
 
-.search-row { display: flex; gap: 10px; margin-top: 16px; }
+/* Search row */
+.search-row { display: flex; gap: 8px; margin-top: 16px; }
 .search-input {
-  flex: 1;
-  background: #f5f5f7;
-  border: 1.5px solid transparent;
-  border-radius: 12px;
-  padding: 10px 14px;
-  font-size: 13px;
-  font-family: inherit;
-  color: #1a1a2e;
-  outline: none;
-  transition: border-color 0.2s;
+  flex: 1; background: #f7f7fa;
+  border: 1.5px solid transparent; border-radius: 12px;
+  padding: 10px 14px; font-size: 13px; font-family: inherit;
+  color: #1a1a2e; outline: none; transition: all 0.2s;
 }
-.search-input:focus { border-color: #667eea; background: #fff; }
-.search-input::placeholder { color: #aaa; }
+.search-input:focus { border-color: #a78bfa; background: #fff; }
+.search-input::placeholder { color: #bbb; }
 .copy-btn {
   background: linear-gradient(135deg, #667eea, #764ba2);
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  padding: 10px 16px;
-  font-size: 13px;
-  font-weight: 500;
-  font-family: inherit;
-  cursor: pointer;
-  white-space: nowrap;
+  color: #fff; border: none; border-radius: 12px;
+  padding: 10px 16px; font-size: 13px; font-weight: 600;
+  font-family: inherit; cursor: pointer; white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(102,126,234,0.35);
+  transition: opacity 0.2s, transform 0.1s;
 }
-.copy-btn:hover { opacity: 0.85; }
+.copy-btn:hover { opacity: 0.9; }
+.copy-btn:active { transform: scale(0.97); }
 
-/* Error banner */
-.error-banner {
-  background: #fff8f0;
-  border: 1.5px solid #fbd38d;
-  border-radius: 16px;
-  padding: 16px 18px;
-  margin-bottom: 16px;
-  display: none;
-}
-.error-banner h3 { font-size: 14px; font-weight: 700; color: #c05621; margin-bottom: 6px; }
-.error-banner p { font-size: 12px; color: #744210; line-height: 1.6; }
-.error-banner ol { font-size: 12px; color: #744210; padding-left: 16px; line-height: 2; }
-
+/* ── Sort tabs ── */
 .sort-tabs {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 14px;
-  overflow-x: auto;
-  scrollbar-width: none;
+  display: flex; gap: 8px; margin-bottom: 12px;
+  overflow-x: auto; scrollbar-width: none;
 }
 .sort-tabs::-webkit-scrollbar { display: none; }
 .sort-tab {
-  background: #fff;
-  border: 1.5px solid #e8e8ec;
-  border-radius: 99px;
-  padding: 6px 16px;
-  font-size: 12px;
-  font-weight: 500;
-  font-family: inherit;
-  color: #888;
-  cursor: pointer;
-  white-space: nowrap;
+  background: #fff; border: 1.5px solid #e8e8f0;
+  border-radius: 99px; padding: 7px 18px;
+  font-size: 12px; font-weight: 600; font-family: inherit;
+  color: #aaa; cursor: pointer; white-space: nowrap;
   transition: all 0.15s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
 }
 .sort-tab.active {
-  background: #1a1a2e;
-  border-color: #1a1a2e;
-  color: #fff;
+  background: #1a1a2e; border-color: #1a1a2e; color: #fff;
+  box-shadow: 0 4px 12px rgba(26,26,46,0.25);
 }
 
-.team-list { display: flex; flex-direction: column; gap: 12px; }
+/* ── Team Cards ── */
+.team-list { display: flex; flex-direction: column; gap: 10px; }
 
 .team-card {
   background: #fff;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  border: 2px solid transparent;
-  transition: transform 0.15s;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  border: 1.5px solid transparent;
+  transition: transform 0.15s, box-shadow 0.15s;
+  position: relative;
 }
-.team-card:active { transform: scale(0.99); }
+.team-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.1); }
 .team-card.rank-1 { border-color: #f5c518; }
-.team-card.rank-2 { border-color: #b8b8b8; }
+.team-card.rank-2 { border-color: #c8c8c8; }
 .team-card.rank-3 { border-color: #cd7f32; }
 
-.card-inner { padding: 16px 18px 14px; }
-.card-top { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 10px; }
+.card-inner { padding: 16px 18px 12px; display: flex; align-items: center; gap: 14px; }
 
+/* Rank Badge — 3D style */
 .rank-badge {
-  width: 52px; height: 52px;
-  border-radius: 16px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px; font-weight: 900;
-  flex-shrink: 0;
+  width: 54px; height: 54px; border-radius: 16px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  flex-shrink: 0; position: relative; overflow: hidden;
+}
+.rank-badge::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 50%; border-radius: 16px 16px 0 0;
+  background: rgba(255,255,255,0.25);
 }
 .rank-badge.r1 {
-  background: linear-gradient(135deg, #ffd700, #f5a623);
-  box-shadow: 0 4px 14px rgba(245,197,24,0.4);
-  color: #7a4f00;
+  background: linear-gradient(160deg, #ffe066, #f5a623, #e8900a);
+  box-shadow: 0 6px 16px rgba(245,166,35,0.45), inset 0 1px 0 rgba(255,255,255,0.3);
 }
 .rank-badge.r2 {
-  background: linear-gradient(135deg, #e8e8e8, #b8b8b8);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
-  color: #555;
+  background: linear-gradient(160deg, #f0f0f0, #c8c8c8, #a8a8a8);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.4);
 }
 .rank-badge.r3 {
-  background: linear-gradient(135deg, #e8c090, #cd7f32);
-  box-shadow: 0 4px 14px rgba(205,127,50,0.35);
-  color: #5a3000;
+  background: linear-gradient(160deg, #f0c080, #cd7f32, #b86820);
+  box-shadow: 0 6px 16px rgba(205,127,50,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
 }
-.rank-badge.rn { background: #f0f2f5; color: #888; font-size: 16px; }
+.rank-badge.rn {
+  background: linear-gradient(160deg, #eef0f8, #dde0ee);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+.rank-num {
+  font-size: 22px; font-weight: 900; line-height: 1;
+  position: relative; z-index: 1;
+}
+.rank-badge.r1 .rank-num { color: #7a4800; text-shadow: 0 1px 2px rgba(0,0,0,0.15); }
+.rank-badge.r2 .rank-num { color: #555; text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+.rank-badge.r3 .rank-num { color: #5a3000; text-shadow: 0 1px 2px rgba(0,0,0,0.15); }
+.rank-badge.rn .rank-num { color: #aaa; font-size: 17px; }
+.rank-icon {
+  font-size: 13px; line-height: 1; margin-top: 1px;
+  position: relative; z-index: 1;
+}
 
+/* Card info */
 .card-info { flex: 1; min-width: 0; }
-.card-name { font-size: 17px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
-.card-members { font-size: 12px; color: #888; line-height: 1.4; }
+.card-name {
+  font-size: 18px; font-weight: 700; color: #1a1a2e;
+  margin-bottom: 3px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.card-members { font-size: 12px; color: #999; line-height: 1.4; }
 .week-badge {
-  display: inline-block;
-  font-size: 10px;
-  padding: 2px 7px;
-  border-radius: 5px;
-  margin-top: 5px;
+  display: inline-block; font-size: 10px; font-weight: 600;
+  padding: 3px 8px; border-radius: 6px; margin-top: 5px;
 }
 .week-badge.updated { background: #e8f5e9; color: #2e7d32; }
-.week-badge.pending { background: #fdecea; color: #c62828; }
+.week-badge.pending { background: #fff3f3; color: #e53e3e; }
 
+/* Score */
 .card-score-col { text-align: right; flex-shrink: 0; }
-.card-score-label { font-size: 11px; color: #aaa; margin-bottom: 2px; }
-.card-score-number {
-  font-size: 34px;
-  font-weight: 900;
-  letter-spacing: -1px;
-  line-height: 1;
+.score-r-label {
+  font-size: 11px; font-weight: 700; color: #bbb;
+  letter-spacing: 1px; margin-bottom: 2px;
 }
-.card-score-number.r1 { color: #f5a623; }
-.card-score-number.r2 { color: #b8b8b8; }
-.card-score-number.r3 { color: #cd7f32; }
-.card-score-number.rn { color: #1a1a2e; }
+.score-num {
+  font-size: 40px; font-weight: 900; line-height: 1;
+  letter-spacing: -2px;
+}
+.score-num.r1 { color: #f5a623; }
+.score-num.r2 { color: #b0b0b0; }
+.score-num.r3 { color: #cd7f32; }
+.score-num.rn { color: #334; }
 
-.card-bar-section { padding: 0 18px 14px; }
-.card-bottom-bar-bg { height: 5px; background: #eef0f4; border-radius: 99px; overflow: hidden; }
-.card-bottom-bar-fill { height: 100%; border-radius: 99px; transition: width 1s ease; }
-.fill-r1 { background: linear-gradient(90deg, #ffd700, #f5a623); }
-.fill-r2 { background: linear-gradient(90deg, #c8c8c8, #b8b8b8); }
-.fill-r3 { background: linear-gradient(90deg, #e8c090, #cd7f32); }
-.fill-rn { background: linear-gradient(90deg, #667eea, #a78bfa); }
+/* Bottom bar */
+.card-bar { padding: 0 18px 14px; }
+.bar-bg { height: 5px; background: #f0f0f5; border-radius: 99px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 99px; transition: width 1s ease; }
+.bar-r1 { background: linear-gradient(90deg, #ffe066, #f5a623); }
+.bar-r2 { background: linear-gradient(90deg, #ddd, #b0b0b0); }
+.bar-r3 { background: linear-gradient(90deg, #f0c080, #cd7f32); }
+.bar-rn { background: linear-gradient(90deg, #667eea, #a78bfa); }
 
+/* ── States ── */
 .center-msg {
-  text-align: center;
-  padding: 48px 20px;
-  color: #aaa;
-  font-size: 13px;
-  background: #fff;
-  border-radius: 20px;
+  text-align: center; padding: 48px 20px;
+  color: #bbb; font-size: 13px;
+  background: #fff; border-radius: 20px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05);
 }
-.center-msg .big { font-size: 32px; margin-bottom: 10px; }
+.center-msg .ico { font-size: 32px; margin-bottom: 10px; }
 
+.error-banner {
+  background: #fffbf0; border: 1.5px solid #fbd38d;
+  border-radius: 16px; padding: 16px 18px; margin-bottom: 14px; display: none;
+}
+.error-banner h3 { font-size: 13px; font-weight: 700; color: #c05621; margin-bottom: 6px; }
+.error-banner ol { font-size: 12px; color: #744210; padding-left: 16px; line-height: 2; }
+
+/* ── Footer ── */
 .footer {
-  text-align: center;
-  padding: 24px 16px 32px;
-  font-size: 11px;
-  color: #bbb;
+  text-align: center; padding: 20px 16px 36px;
+  font-size: 11px; color: #ccc;
 }
 
-@media (max-width: 400px) {
-  .card-score-number { font-size: 28px; }
-  .rank-badge { width: 44px; height: 44px; font-size: 18px; border-radius: 13px; }
-  .card-name { font-size: 15px; }
-  .card-inner { padding: 14px 14px 10px; }
-  .card-bar-section { padding: 0 14px 12px; }
+/* ── Responsive ── */
+@media (max-width: 380px) {
+  .score-num { font-size: 32px; }
+  .rank-badge { width: 46px; height: 46px; border-radius: 13px; }
+  .rank-num { font-size: 18px; }
+  .card-name { font-size: 16px; }
+  .card-inner { padding: 14px 14px 10px; gap: 10px; }
+  .card-bar { padding: 0 14px 12px; }
   .copy-btn { font-size: 12px; padding: 10px 12px; }
 }
 </style>
@@ -314,50 +318,51 @@ body {
     <div class="app-title">꾸매바 21기</div>
     <div class="app-sub">팀 현황 · 자동 순위</div>
   </div>
-  <button class="app-refresh" id="refresh-btn" onclick="loadData()" title="새로고침">↻</button>
+  <button class="app-refresh" id="refresh-btn" onclick="loadData()">↻</button>
 </div>
 
 <div class="main">
 
   <div class="hero-card">
-    <div class="hero-label">전체 기간 진행도</div>
-    <div class="progress-bar-wrap">
-      <div class="pct-badge" id="pct-badge">0%</div>
-      <div class="progress-bar-bg">
-        <div class="progress-bar-fill" id="prog-fill" style="width:0%">
-          <span class="runner-emoji">🏃</span>
+    <div class="hero-label">
+      <span>전체 기간 진행도</span>
+      <span class="hero-pct" id="pct-label">0%</span>
+    </div>
+    <div class="prog-wrap">
+      <div class="prog-bg">
+        <div class="prog-fill" id="prog-fill" style="width:2%">
+          <div class="prog-runner">🏃 <span id="runner-pct">완료!</span></div>
         </div>
       </div>
     </div>
-    <div class="progress-dates">
+    <div class="prog-dates">
       <span>2026.05.17</span>
       <span>2026.10.17</span>
     </div>
+
     <div class="hero-status">
-      <div class="hero-status-title" id="status-title">진행 중</div>
-      <div class="hero-status-sub" id="status-sub">읽기 마라톤 · 시편 1~150편</div>
-      <div class="data-bar-wrap">
-        <div class="data-bar-label">데이터 반영: 총 22주 중 <strong id="max-week-label">—</strong>까지</div>
-        <div class="data-bar-bg">
-          <div class="data-bar-fill" id="data-bar-fill" style="width:0%"></div>
+      <div class="hero-title" id="status-title">진행 중</div>
+      <div class="hero-desc" id="status-desc">읽기 마라톤 · 시편 1~150편</div>
+      <div class="data-reflect">
+        <div class="data-reflect-label">
+          <span>데이터 반영: 총 22주 중 <strong id="max-week">—</strong>까지</span>
         </div>
+        <div class="data-bg"><div class="data-fill" id="data-fill" style="width:0%"></div></div>
       </div>
-      <div class="hero-meta">기간: 2026.05.17 ~ 2026.10.17 · 총 150편</div>
+      <div class="hero-meta" id="hero-meta">기간: 2026.05.17 ~ 2026.10.17 · 총 150편</div>
     </div>
+
     <div class="search-row">
-      <input class="search-input" type="text" id="search-input" placeholder="팀명/팀원 검색" oninput="onSearch()">
+      <input class="search-input" type="text" id="search-input"
+        placeholder="팀명/팀원 검색" oninput="onSearch()">
       <button class="copy-btn" onclick="copyLink()">현재 상태 링크 복사</button>
     </div>
   </div>
 
-  <!-- 오류 안내 배너 -->
   <div class="error-banner" id="error-banner">
     <h3>⚠️ 데이터를 불러올 수 없어요</h3>
-    <p style="margin-bottom:8px">Google Sheets 공유 설정을 확인해주세요:</p>
     <ol>
-      <li>시트 우측 상단 <strong>공유</strong> 클릭</li>
-      <li><strong>"링크가 있는 모든 사용자"</strong> 선택</li>
-      <li>권한: <strong>뷰어</strong> 로 설정</li>
+      <li>시트 <strong>공유</strong> → <strong>"링크가 있는 모든 사용자"</strong> → <strong>뷰어</strong></li>
       <li>페이지 새로고침</li>
     </ol>
   </div>
@@ -369,27 +374,20 @@ body {
   </div>
 
   <div class="team-list" id="team-list">
-    <div class="center-msg"><div class="big">⏳</div>데이터 불러오는 중...</div>
+    <div class="center-msg"><div class="ico">⏳</div>데이터 불러오는 중...</div>
   </div>
-
 </div>
 
-<div class="footer">
-  <p id="last-loaded">꾸매바 21기 성경 읽기 마라톤</p>
-</div>
+<div class="footer"><p id="last-loaded">꾸매바 21기 성경 읽기 마라톤</p></div>
 
 <script>
-// ── 설정 ──────────────────────────────────────
 const SHEET_ID    = '1mJgFTnCpf403iwUQzybr8q8q2lAeWW9eWCkUqQ2iAAc';
 const SHEET_NAME  = '관리시트';
-const CSV_URL     = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
-const PROXY_URL   = `https://api.allorigins.win/raw?url=${encodeURIComponent(CSV_URL)}`;
 const START       = new Date('2026-05-17');
 const END         = new Date('2026-10-17');
 const TOTAL_DAYS  = Math.round((END - START) / 86400000);
 const TOTAL_WEEKS = 22;
 const TOTAL_PSALMS = 150;
-// ─────────────────────────────────────────────
 
 let sortMode  = 'rank';
 let teamsData = [];
@@ -403,153 +401,124 @@ function initProgress() {
   const psalm   = Math.min(Math.ceil(elapsed / TOTAL_DAYS * TOTAL_PSALMS), TOTAL_PSALMS);
   const done    = today >= END;
 
-  document.getElementById('pct-badge').textContent = pct + '%';
-  setTimeout(() => { document.getElementById('prog-fill').style.width = pct + '%'; }, 300);
+  document.getElementById('pct-label').textContent = pct + '%';
+  document.getElementById('runner-pct').textContent = pct + '%';
+  setTimeout(() => {
+    document.getElementById('prog-fill').style.width = Math.max(pct, 2) + '%';
+  }, 300);
   document.getElementById('status-title').textContent = done ? 'Completed' : '진행 중';
-  document.getElementById('status-sub').textContent   = done
+  document.getElementById('status-desc').textContent  = done
     ? '전체 읽기 마라톤 · 완료'
     : `오늘 약 ${psalm}편째 · 읽기 마라톤`;
 }
 
-/* ── CSV 파싱 (멀티라인 셀 지원) ── */
-function parseCSV(text) {
-  const rows = [];
-  let row = [], cell = '', inQ = false;
-  for (let i = 0; i < text.length; i++) {
-    const c = text[i], next = text[i+1];
-    if (inQ) {
-      if (c === '"' && next === '"') { cell += '"'; i++; }
-      else if (c === '"') { inQ = false; }
-      else { cell += c; }
-    } else {
-      if (c === '"') { inQ = true; }
-      else if (c === ',') { row.push(cell.trim()); cell = ''; }
-      else if (c === '\r' && next === '\n') { row.push(cell.trim()); rows.push(row); row = []; cell = ''; i++; }
-      else if (c === '\n' || c === '\r') { row.push(cell.trim()); rows.push(row); row = []; cell = ''; }
-      else { cell += c; }
-    }
-  }
-  if (cell || row.length) { row.push(cell.trim()); rows.push(row); }
-  return rows;
+/* ── JSONP 콜백 ── */
+window.handleSheetData = function(data) {
+  try {
+    const rows = data.table.rows.map(r =>
+      r.c.map(cell => (cell && cell.v !== null && cell.v !== undefined) ? String(cell.v) : '')
+    );
+    teamsData = parseSheetData(rows);
+    if (!teamsData.length) throw new Error('파싱 실패');
+    updateHeroMeta();
+    renderTeams();
+    document.getElementById('error-banner').style.display = 'none';
+    document.getElementById('last-loaded').textContent =
+      `최근 업데이트: ${new Date().toLocaleTimeString('ko-KR')} · 꾸매바 21기`;
+  } catch(e) { showError(e.message); }
+  const btn = document.getElementById('refresh-btn');
+  btn.disabled = false; btn.textContent = '↻';
+};
+
+function showError(msg) {
+  document.getElementById('error-banner').style.display = 'block';
+  document.getElementById('team-list').innerHTML =
+    '<div class="center-msg"><div class="ico">📋</div>시트 공유 설정 후 새로고침해주세요</div>';
+  document.getElementById('last-loaded').textContent = '⚠ 로드 실패: ' + msg;
+  const btn = document.getElementById('refresh-btn');
+  btn.disabled = false; btn.textContent = '↻';
+}
+
+function loadData() {
+  const btn = document.getElementById('refresh-btn');
+  btn.disabled = true; btn.textContent = '⏳';
+  document.getElementById('error-banner').style.display = 'none';
+  document.getElementById('team-list').innerHTML =
+    '<div class="center-msg"><div class="ico">⏳</div>데이터 불러오는 중...</div>';
+
+  const old = document.getElementById('jsonp-script');
+  if (old) old.remove();
+
+  const script = document.createElement('script');
+  script.id  = 'jsonp-script';
+  script.src = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&callback=handleSheetData&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+  const timer = setTimeout(() => {
+    showError('요청 시간 초과');
+    script.remove();
+  }, 12000);
+
+  script.onload  = () => clearTimeout(timer);
+  script.onerror = () => { clearTimeout(timer); showError('네트워크 오류'); };
+  document.head.appendChild(script);
 }
 
 /* ── 시트 파싱 ── */
 function parseSheetData(rows) {
   const teams = [];
   let i = 0;
-
   while (i < rows.length) {
-    const row = rows[i];
+    const row  = rows[i];
     const col0 = (row[0] || '').replace(/\n/g,' ').trim();
-
     if (col0 !== '총 포인트') { i++; continue; }
 
-    // 총 포인트 (col C = index 2)
     const totalScore = parseInt(row[2] || '0') || 0;
-
-    // 최신화 여부: col3부터 7칸씩, 6번째가 TRUE/FALSE 문자열
     let updatedWeeks = 0;
     for (let w = 0; w < TOTAL_WEEKS; w++) {
       const base = 3 + w * 7;
       if (base + 6 < row.length) {
-        const label = (row[base] || '').trim();
-        const val   = (row[base + 6] || '').trim().toUpperCase();
-        if (label === '최신화 여부' && val === 'TRUE') updatedWeeks = w + 1;
+        const lbl = (row[base] || '').trim();
+        const val = (row[base+6] || '').trim().toUpperCase();
+        if (lbl === '최신화 여부' && val === 'TRUE') updatedWeeks = w + 1;
       }
     }
 
-    // 멤버 읽기
     let teamName = '';
     const members = [];
     i++;
-
     while (i < rows.length) {
       const mr = rows[i];
       const c0 = (mr[0] || '').replace(/\n/g,' ').trim();
       const c1 = (mr[1] || '').replace(/\n/g,' ').trim();
       const c2 = (mr[2] || '').replace(/\n/g,' ').trim();
-
       if (c0 === '총 포인트') break;
       if (c0 === '으쌰포인트' || c0 === '주간포인트') { i++; continue; }
-
       if (c2 && c2 !== '총 포인트' && c2 !== '으쌰포인트') {
-        // 팀명 감지: c0 또는 c1에 "조" 포함
         if (!teamName) {
           if (c0.includes('조')) teamName = c0;
           else if (c1.includes('조')) teamName = c1;
         }
-        // 인증 수: 뒤에서 6번째 (인증, 필사, 미인증, 면제, 완독, 완독여부)
-        const certIdx = mr.length - 6;
-        const cert    = certIdx >= 0 ? (parseInt(mr[certIdx]) || 0) : 0;
+        const ci   = mr.length - 6;
+        const cert = ci >= 0 ? (parseInt(mr[ci]) || 0) : 0;
         members.push({ name: c2, cert });
       }
       i++;
     }
-
     if (members.length > 0) {
-      teams.push({
-        name: teamName || (teams.length + 1) + '조',
-        totalScore,
-        updatedWeeks,
-        members
-      });
+      teams.push({ name: teamName || (teams.length+1)+'조', totalScore, updatedWeeks, members });
     }
   }
   return teams;
 }
 
-/* ── 데이터 로드 ── */
-async function loadData() {
-  const btn = document.getElementById('refresh-btn');
-  btn.disabled = true; btn.textContent = '⏳';
-  document.getElementById('error-banner').style.display = 'none';
-  document.getElementById('team-list').innerHTML =
-    '<div class="center-msg"><div class="big">⏳</div>데이터 불러오는 중...</div>';
-
-  try {
-    // 1차: 직접 fetch → 실패 시 2차: CORS 프록시
-    let text = '';
-    try {
-      const res = await fetch(CSV_URL);
-      if (!res.ok) throw new Error('direct fail');
-      text = await res.text();
-      if (text.trim().startsWith('<')) throw new Error('html returned');
-    } catch(e) {
-      const res2 = await fetch(PROXY_URL);
-      if (!res2.ok) throw new Error('HTTP ' + res2.status);
-      text = await res2.text();
-      if (text.trim().startsWith('<')) throw new Error('시트 공유 설정 필요');
-    }
-
-    const rows = parseCSV(text);
-    teamsData  = parseSheetData(rows);
-    if (!teamsData.length) throw new Error('파싱 실패 — 시트 구조 확인 필요');
-
-    updateHeroMeta();
-    renderTeams();
-
-    document.getElementById('last-loaded').textContent =
-      `최근 업데이트: ${new Date().toLocaleTimeString('ko-KR')} · 꾸매바 21기`;
-  } catch(err) {
-    document.getElementById('error-banner').style.display = 'block';
-    document.getElementById('team-list').innerHTML =
-      `<div class="center-msg"><div class="big">📋</div>
-      시트 공유 설정 후 새로고침해주세요</div>`;
-    document.getElementById('last-loaded').textContent = '⚠ 로드 실패: ' + err.message;
-  } finally {
-    btn.disabled = false; btn.textContent = '↻';
-  }
-}
-
-/* ── 히어로 메타 ── */
+/* ── Hero meta ── */
 function updateHeroMeta() {
-  const maxWeek = Math.max(...teamsData.map(t => t.updatedWeeks), 0);
-  document.getElementById('max-week-label').textContent = maxWeek > 0 ? `Week ${maxWeek}` : '없음';
-  document.getElementById('data-bar-fill').style.width =
-    Math.round(maxWeek / TOTAL_WEEKS * 100) + '%';
+  const maxW = Math.max(...teamsData.map(t => t.updatedWeeks), 0);
+  document.getElementById('max-week').textContent = maxW > 0 ? `Week ${maxW}` : '없음';
+  document.getElementById('data-fill').style.width = Math.round(maxW / TOTAL_WEEKS * 100) + '%';
 }
 
-/* ── 렌더 ── */
+/* ── Render ── */
 function renderTeams() {
   const list = document.getElementById('team-list');
   let data = [...teamsData];
@@ -564,51 +533,50 @@ function renderTeams() {
 
   const byScore = [...teamsData].sort((a,b) => b.totalScore - a.totalScore);
   const rankMap = {};
-  byScore.forEach((t,i) => rankMap[t.name] = i + 1);
+  byScore.forEach((t,i) => rankMap[t.name] = i+1);
 
-  if (sortMode === 'rank')   data.sort((a,b) => b.totalScore - a.totalScore);
+  if (sortMode === 'rank') data.sort((a,b) => b.totalScore - a.totalScore);
   else if (sortMode === 'name') data.sort((a,b) => a.name.localeCompare(b.name,'ko'));
-  else if (sortMode === 'week') data.sort((a,b) => b.updatedWeeks - a.updatedWeeks);
+  else data.sort((a,b) => b.updatedWeeks - a.updatedWeeks);
 
   if (!data.length) {
-    list.innerHTML = '<div class="center-msg"><div class="big">🔍</div>검색 결과 없음</div>';
+    list.innerHTML = '<div class="center-msg"><div class="ico">🔍</div>검색 결과 없음</div>';
     return;
   }
 
   const maxScore = Math.max(...teamsData.map(t => t.totalScore), 1);
-  const medals   = ['🥇','🥈','🥉'];
+  const icons = ['🏆','🥈','🥉'];
 
   list.innerHTML = data.map(t => {
     const rank  = rankMap[t.name];
     const rc    = rank === 1 ? 'r1' : rank === 2 ? 'r2' : rank === 3 ? 'r3' : 'rn';
-    const badge = rank <= 3
-      ? `<div class="rank-badge ${rc}">${medals[rank-1]}</div>`
-      : `<div class="rank-badge rn">${rank}</div>`;
     const barW  = Math.round(t.totalScore / maxScore * 100);
     const names = t.members.map(m => m.name).join(', ');
     const wBadge = t.updatedWeeks > 0
       ? `<span class="week-badge updated">W${t.updatedWeeks} 반영</span>`
       : `<span class="week-badge pending">미업데이트</span>`;
+    const icon = rank <= 3 ? icons[rank-1] : '';
 
     return `
     <div class="team-card rank-${rank <= 3 ? rank : 'n'}">
       <div class="card-inner">
-        <div class="card-top">
-          ${badge}
-          <div class="card-info">
-            <div class="card-name">${t.name}</div>
-            <div class="card-members">${names}</div>
-            ${wBadge}
-          </div>
-          <div class="card-score-col">
-            <div class="card-score-label">R</div>
-            <div class="card-score-number ${rc}">${t.totalScore.toLocaleString()}</div>
-          </div>
+        <div class="rank-badge ${rc}">
+          <div class="rank-num">${rank}</div>
+          <div class="rank-icon">${icon}</div>
+        </div>
+        <div class="card-info">
+          <div class="card-name">${t.name}</div>
+          <div class="card-members">${names}</div>
+          ${wBadge}
+        </div>
+        <div class="card-score-col">
+          <div class="score-r-label">R</div>
+          <div class="score-num ${rc}">${t.totalScore.toLocaleString()}</div>
         </div>
       </div>
-      <div class="card-bar-section">
-        <div class="card-bottom-bar-bg">
-          <div class="card-bottom-bar-fill fill-${rc}" style="width:${barW}%"></div>
+      <div class="card-bar">
+        <div class="bar-bg">
+          <div class="bar-fill bar-${rc}" style="width:${barW}%"></div>
         </div>
       </div>
     </div>`;
@@ -627,15 +595,11 @@ function setSort(btn, mode) {
 }
 function copyLink() {
   const url = location.href;
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(url).then(() => alert('링크가 복사됐습니다!'));
-  } else {
-    const el = document.createElement('textarea');
-    el.value = url; document.body.appendChild(el);
-    el.select(); document.execCommand('copy');
-    document.body.removeChild(el);
-    alert('링크가 복사됐습니다!');
-  }
+  navigator.clipboard ? navigator.clipboard.writeText(url).then(() => alert('링크 복사됐습니다!'))
+    : (() => { const el = document.createElement('textarea'); el.value = url;
+        document.body.appendChild(el); el.select();
+        document.execCommand('copy'); document.body.removeChild(el);
+        alert('링크 복사됐습니다!'); })();
 }
 
 initProgress();
